@@ -30,7 +30,8 @@ public class InteractivePlayer implements Player {
   /**
    * Construct a player with the given tick to play the given game.
    * This will add a observer to the game for the alternating playing.
-   * @param setTickHandler The function to set the tickHandler.
+   * @param game the game to be played, mustn't be null
+   * @param setTickHandler The function to set the tickHandler, mustn't be null.
    *  The tickHandler is the function to handle the user input for a given tile.
    */
   public InteractivePlayer(
@@ -38,6 +39,12 @@ public class InteractivePlayer implements Player {
     TicTacToe game,
     Consumer<Consumer<Coord>> setTickHandler
   ) {
+    if (game == null)
+      throw new IllegalArgumentException("game mustn't be null");
+
+    if (setTickHandler == null)
+      throw new IllegalArgumentException("setTickhandler mustn't be null");
+
     this.tick = tick;
     this.game = game;
     this.setTickHandler = setTickHandler;

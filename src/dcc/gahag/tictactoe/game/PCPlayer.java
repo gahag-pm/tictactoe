@@ -26,8 +26,12 @@ public class PCPlayer implements Player {
   /**
    * Construct a player with the given tick to play the given game.
    * This will add a observer to the game for the alternating playing.
+   * @param game the game to be played, mustn't be null
    */
   public PCPlayer(char tick, TicTacToe game) {
+    if (game == null)
+      throw new IllegalArgumentException("game mustn't be null");
+
     this.tick = tick;
     this.game = game;
 

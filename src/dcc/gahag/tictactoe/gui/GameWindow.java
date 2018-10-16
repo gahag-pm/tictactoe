@@ -30,9 +30,13 @@ public class GameWindow extends JFrame {
    * The window has a fixed size, and disposes on close.
    * This will install observers in the game to update the buttons' text and inform the
    * winner or draw.
+   * @param game the game to be displayed, mustn't be null
    */
   public GameWindow(final TicTacToe game) {
     super("Tic Tac Toe");
+
+    if (game == null)
+      throw new IllegalArgumentException("game mustn't be null");
 
     this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -115,6 +119,7 @@ public class GameWindow extends JFrame {
   /**
    * Sets the tick handler.
    * The tickHandler is the function to handle the user input for a given tile.
+   * @param handler the tick handler, possibly null
    */
   public void setTickHandler(Consumer<Coord> handler) {
     this.tickHandler = handler;

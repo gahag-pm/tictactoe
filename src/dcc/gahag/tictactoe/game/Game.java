@@ -46,20 +46,32 @@ public class Game implements TicTacToe {
 
   /**
    * {@inheritDoc}
+   * @param c the coordinate of the tile, mustn't be null
    */
   public boolean isTileSet(Coord c) {
+    if (c == null)
+      throw new IllegalArgumentException("Coord mustn't be null");
+
     return this.getTile(c) != '\0';
   }
   /**
    * {@inheritDoc}
+   * @param c the coordinate of the tile, mustn't be null
    */
   public char getTile(Coord c) {
+    if (c == null)
+      throw new IllegalArgumentException("Coord mustn't be null");
+
     return this.tiles[c.x][c.y];
   }
   /**
    * {@inheritDoc}
+   * @param c the coordinate of the tile, mustn't be null
    */
   public void setTile(Coord c, char tick) {
+    if (c == null)
+      throw new IllegalArgumentException("Coord mustn't be null");
+    
     if (tick == '\0')
       this.empty.add(c);
     else
@@ -83,6 +95,7 @@ public class Game implements TicTacToe {
    * {@inheritDoc}
    */
   public void addObserver(Observer<Coord> observer) {
-    this.observers.add(observer);
+    if (observer != null)
+      this.observers.add(observer);
   }
 }

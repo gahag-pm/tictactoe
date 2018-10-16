@@ -16,11 +16,14 @@ public class MainWindow extends JFrame {
   /**
    * Construct a new MainWindow.
    * The window has a fixed size, and exits on close.
-   * @param gameFactory the function to create a new game, called when the new game button
-   *  is clicked
+   * @param gameFactory The function to create a new game, called when the new game button
+   *  is clicked. Mustn't be null.
    */
   public MainWindow(Runnable gameFactory) {
     super("Tic Tac Toe");
+
+    if (gameFactory == null)
+      throw new IllegalArgumentException("gameFactory mustn't be null");
 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
