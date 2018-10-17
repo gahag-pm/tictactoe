@@ -16,7 +16,7 @@ import dcc.gahag.tictactoe.gui.MainWindow;
  * The main class for the tic tac toe game.
  */
 public class Main {
-  public static void main(String args[]) {
+  public static void main(String[] args) {
     // Set the look & feel to gtk if possible:
     try {
       UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
