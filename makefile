@@ -13,7 +13,7 @@ directories:
 
 build: directories
 	@javac -d ${obj-dir} ${units}
-	@jar -cvef ${main-class} ${bin-dir}/${output} -C ${obj-dir} . # ${objects}
+	@jar -cvef ${main-class} ${bin-dir}/${output} -C ${obj-dir} .
 
 run:
 	@java -jar ${bin-dir}/${output}
