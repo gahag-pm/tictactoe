@@ -1,6 +1,6 @@
 # -*- after-save-hook: org-latex-export-to-pdf; -*-
 
-#+title: Programação Modular - Tic Tac Toe
+#+title: Programação Modular - Atividade Prática 03
 #+author: Gabriel Bastos
 
 #+options: title:nil date:nil H:5
@@ -41,7 +41,7 @@
   
   \vfill{
     \bfseries\Large
-    Trabalho Prático 1\\
+    Atividade Prática 03 - Interface Gráfica\\
     Setembro 2018\\
   }
   \vfill{
@@ -52,18 +52,44 @@
 \end{titlepage}
 #+end_export
 
-* Passeio do cavalo
-  No trabalho prático, recebemos a tarefa de implementar um algoritmo para calcular o
-  passeio do cavalo. O passeio do cavalo é um caminho que o cavalo percorre, cobrindo todo
-  o tabuleiro de xadrez, partindo de uma casa inicial definida. O passeio só é válido se o
-  cavalo percorrer todas as casas do tabuleiro.
-* Algoritmo
-  De acordo com a descrição do algoritmo a ser utilizado, implementei o código com a
-  técnica de /backtracking/. Este explora todas as rotas, e retrocede caso um caminho sem
-  saída seja alcançado antes de se completar o passeio. Ao completar o tabuleiro, o
-  algoritmo chega em seu fim. Caso nenhum passeio completo seja encontrado, indica-se a
-  impossibilidade deste.
-* Arquitetura
-  TODO insert observer design pattern here
-** Diagrama UML
-   [[./uml/diagram.pdf]]
+* Jogo da velha
+  No trabalho prático, recebemos a tarefa de implementar um jogo da velha com interface
+  gráfica, utilizando a biblioteca /swing/ nativa da plataforma java. Foi indicado como
+  requisito um botão para iniciar um novo jogo, permitindo vários jogos em sequência, além
+  de uma janela /popup/ indicando o vencedor ou empate.
+* Design e implementação
+  A implementação utiliza mecanismos modernos da plataforma java, como por exemplo a
+  interface funcional [[https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html][/Consumer/]], e portanto requer a plataforma versão 8 ou superior.
+** Algoritmo
+   Como o propósito do trabalho é observar e exercitar a modularização, optei pelo
+   algoritmo de jogadas aleatórias devido à sua simplicidade. Para realizar sua jogada, o
+   computador sorteia uma casa dentre as casas vazias no tabuleiro. Não há nenhum tipo de
+   inteligência envolvida em sua jogada.
+** Interface
+   Para a interface do jogo, observei aspectos da interação em si. Por exemplo, existe a
+   possibilidade de clicar em uma casa que já foi marcada, seja por si ou pelo adversário,
+   ou então tentar realizar duas jogadas antes que o computador termine sua vez. O usuário
+   também pode tentar redimensionar as janelas para tamanhos exagerados, ou realizar as
+   jogadas de forma rápida, exigindo a agilidade do processamento da interface.
+   #+latex: \bigbreak
+   Todas estas questões foram consideradas, resultando em uma interface consistente e bem
+   polida, sendo ao mesmo tempo simples e rígida. Desta forma, não se permite que o
+   usuário explore a interface para benefício ilícito no jogo.
+** Arquitetura
+   Escolhi o padrão de projeto /observer/ como mecanismo fundamental da modularização, o
+   que permitiu que todo o código relativo à um interesse funcional seja contido dentro do
+   respectivo módulo. Desta forma, mesmo havendo interação entre o módulo da interface
+   gráfica e os módulos dos jogadores (tanto o computador, quanto o jogador provido pela
+   interação), não há acoplamento direto entre eles.
+   #+latex: \bigbreak
+   A comunicação entre os módulos é centrada no módulo de dados do tabuleiro, que através
+   do padrão de projeto /observer/, permite ser observado. Assim, a interface gráfica
+   observa o tabuleiro para atualizar o texto dos botões, bem como indicar um vencedor ou
+   empate. Já os jogadores, observam o tabuleiro para realizar suas jogadas de forma
+   alternada. Ainda, o módulo que representa o jogador humano, observa a interface para
+   ser notificado do clique dos botões, para então materializar a jogada realizada.
+   #+latex: \bigbreak
+   Desta forma, devido à utilização de classes e à natureza modular da implementação, é
+   possível iniciar vários jogos, e jogá-los ao mesmo tempo.
+*** Diagrama UML
+    [[./uml/diagram.pdf]]
